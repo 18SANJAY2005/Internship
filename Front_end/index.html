@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A clean, responsive task tracker interface built with HTML and CSS.">
+  <title>Taskflow — Task Tracker</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#dashboard" aria-label="Taskflow home">
+        <span class="brand-mark" aria-hidden="true">✓</span>
+        <span>taskflow<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#dashboard">Overview</a>
+        <a class="nav-link" href="#add-task">Add task</a>
+        <a class="nav-link" href="#task-list">My tasks</a>
+      </nav>
+      <a class="profile" href="#task-list" aria-label="Go to your tasks">
+        <span class="profile-avatar" aria-hidden="true">S</span>
+        <span class="profile-name">My workspace</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page-shell" id="dashboard">
+    <section class="welcome-row" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+        <h1 id="page-title">Make today <span>count.</span></h1>
+        <p class="welcome-copy">A little progress each day adds up to big results. Keep your focus and get things done.</p>
+      </div>
+      <a class="primary-button welcome-button" href="#add-task"><span aria-hidden="true">＋</span> Create a task</a>
+    </section>
+
+    <section class="stats-grid" aria-label="Task summary">
+      <article class="stat-card">
+        <div class="stat-icon violet" aria-hidden="true">▤</div>
+        <div><p class="stat-label">Total tasks</p><p class="stat-value">08</p><p class="stat-note">Across your workspace</p></div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon amber" aria-hidden="true">◷</div>
+        <div><p class="stat-label">In progress</p><p class="stat-value">05</p><p class="stat-note">Keep the momentum going</p></div>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon green" aria-hidden="true">✓</div>
+        <div><p class="stat-label">Completed</p><p class="stat-value">03</p><p class="stat-note">Nice work so far!</p></div>
+      </article>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel form-panel" id="add-task" aria-labelledby="form-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">PLAN SOMETHING NEW</p>
+            <h2 id="form-title">Create a task</h2>
+          </div>
+          <span class="heading-icon" aria-hidden="true">＋</span>
+        </div>
+        <p class="panel-intro">Add the details below to keep your next step clear.</p>
+        <p class="required-note"><span aria-hidden="true">*</span> Required fields</p>
+
+        <form class="task-form" action="#" method="get">
+          <div class="field">
+            <label for="task-title">Task title <span aria-hidden="true">*</span></label>
+            <input id="task-title" name="title" type="text" placeholder="e.g. Prepare project presentation" maxlength="100" required>
+          </div>
+          <div class="field">
+            <label for="task-description">Description</label>
+            <textarea id="task-description" name="description" rows="4" placeholder="Add a few details about this task..."></textarea>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="due-date">Due date <span aria-hidden="true">*</span></label>
+              <input id="due-date" name="due-date" type="date" required>
+            </div>
+            <div class="field">
+              <label for="priority">Priority <span aria-hidden="true">*</span></label>
+              <select id="priority" name="priority" required>
+                <option value="">Choose priority</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option>Personal</option>
+              <option>Work</option>
+              <option>Study</option>
+            </select>
+          </div>
+          <button class="primary-button submit-button" type="submit">Add task <span aria-hidden="true">→</span></button>
+          <button class="text-button" type="reset">Clear form</button>
+        </form>
+        <p class="static-note">Demo interface: task creation is a visual form only; JavaScript and data storage are not included.</p>
+      </section>
+
+      <section class="panel tasks-panel" id="task-list" aria-labelledby="tasks-title">
+        <div class="tasks-heading">
+          <div>
+            <p class="eyebrow">STAY ON TRACK</p>
+            <h2 id="tasks-title">Your tasks <span class="count-pill">3</span></h2>
+          </div>
+          <a class="subtle-link" href="#add-task">＋ Add new</a>
+        </div>
+
+        <form class="toolbar" action="#" method="get" aria-label="Task search and filters">
+          <div class="search-field">
+            <label class="visually-hidden" for="task-search">Search tasks</label>
+            <span aria-hidden="true">⌕</span>
+            <input id="task-search" name="search" type="search" placeholder="Search your tasks">
+          </div>
+          <div class="filter-field">
+            <label class="visually-hidden" for="task-filter">Filter tasks by status</label>
+            <select id="task-filter" name="status">
+              <option value="all">All tasks</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="task-list-label">
+          <span>RECENT TASKS</span>
+          <span>3 ITEMS</span>
+        </div>
+        <ul class="task-list">
+          <li>
+            <article class="task-item">
+              <span class="task-check pending-check" aria-hidden="true"></span>
+              <div class="task-main">
+                <h3>Complete HTML assignment</h3>
+                <p>Finish the responsive page structure and review semantic elements.</p>
+                <div class="task-details">
+                  <span class="detail"><span aria-hidden="true">▦</span> 19 Nov 2026</span>
+                  <span class="priority-tag high">High priority</span>
+                </div>
+              </div>
+              <div class="task-side">
+                <span class="status-tag pending">Pending</span>
+                <div class="task-actions">
+                  <button type="button" class="icon-button" aria-label="Mark Complete for Complete HTML assignment" title="Mark complete">✓</button>
+                  <button type="button" class="icon-button delete-button" aria-label="Delete Complete HTML assignment" title="Delete">×</button>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="task-item">
+              <span class="task-check pending-check" aria-hidden="true"></span>
+              <div class="task-main">
+                <h3>Prepare project documentation</h3>
+                <p>Write the README and add desktop and mobile screenshots.</p>
+                <div class="task-details">
+                  <span class="detail"><span aria-hidden="true">▦</span> 21 Nov 2026</span>
+                  <span class="priority-tag medium">Medium priority</span>
+                </div>
+              </div>
+              <div class="task-side">
+                <span class="status-tag pending">Pending</span>
+                <div class="task-actions">
+                  <button type="button" class="icon-button" aria-label="Mark Complete for Prepare project documentation" title="Mark complete">✓</button>
+                  <button type="button" class="icon-button delete-button" aria-label="Delete Prepare project documentation" title="Delete">×</button>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="task-item completed-task">
+              <span class="task-check completed-check" aria-hidden="true">✓</span>
+              <div class="task-main">
+                <h3>Practice Python exercises</h3>
+                <p>Complete the daily programming practice session.</p>
+                <div class="task-details">
+                  <span class="detail"><span aria-hidden="true">▦</span> 18 Nov 2026</span>
+                  <span class="priority-tag low">Low priority</span>
+                </div>
+              </div>
+              <div class="task-side">
+                <span class="status-tag completed">Completed</span>
+                <div class="task-actions">
+                  <button type="button" class="icon-button" aria-label="Task already completed" disabled>✓</button>
+                  <button type="button" class="icon-button delete-button" aria-label="Delete Practice Python exercises" title="Delete">×</button>
+                </div>
+              </div>
+            </article>
+          </li>
+        </ul>
+
+        <section class="empty-state" aria-labelledby="empty-title" hidden>
+          <span class="empty-illustration" aria-hidden="true">✓</span>
+          <h3 id="empty-title">Nothing on your list</h3>
+          <p>There are no tasks to show right now. Create a task to get started.</p>
+          <a href="#add-task" class="subtle-link">Create your first task →</a>
+        </section>
+        <p class="static-note">Search, filters and task action buttons are UI-only in this HTML/CSS version.</p>
+      </section>
+    </div>
+
+    <footer class="page-footer">
+      <span>© 2026 Taskflow. Built to help you focus.</span>
+      <span>Small steps. Big progress.</span>
+    </footer>
+  </main>
+</body>
+</html>
