@@ -3,210 +3,344 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A clean, responsive task tracker interface built with HTML and CSS.">
-  <title>Taskflow — Task Tracker</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta name="description" content="A responsive and accessible task tracker interface built with HTML and CSS.">
+  <title>Task Tracker | My Workspace</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#dashboard" aria-label="Taskflow home">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#dashboard" aria-label="Task Tracker home">
         <span class="brand-mark" aria-hidden="true">✓</span>
-        <span>taskflow<span class="brand-dot">.</span></span>
+        <span>Task Tracker</span>
       </a>
-      <nav class="main-nav" aria-label="Main navigation">
-        <a class="nav-link active" href="#dashboard">Overview</a>
-        <a class="nav-link" href="#add-task">Add task</a>
-        <a class="nav-link" href="#task-list">My tasks</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#add-task">Add Task</a></li>
+          <li><a href="#task-list">My Tasks</a></li>
+        </ul>
       </nav>
-      <a class="profile" href="#task-list" aria-label="Go to your tasks">
-        <span class="profile-avatar" aria-hidden="true">S</span>
-        <span class="profile-name">My workspace</span>
-      </a>
     </div>
   </header>
 
-  <main class="page-shell" id="dashboard">
-    <section class="welcome-row" aria-labelledby="page-title">
+  <main id="main-content">
+    <section class="welcome-panel" id="dashboard" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
-        <h1 id="page-title">Make today <span>count.</span></h1>
-        <p class="welcome-copy">A little progress each day adds up to big results. Keep your focus and get things done.</p>
+        <p class="eyebrow">YOUR WORKSPACE</p>
+        <h1 id="page-title">Stay on top of your tasks</h1>
+        <p class="intro-text">Plan your day, organise your work and keep moving towards your goals.</p>
       </div>
-      <a class="primary-button welcome-button" href="#add-task"><span aria-hidden="true">＋</span> Create a task</a>
+      <a class="welcome-link" href="#add-task">+ Add a task</a>
     </section>
 
-    <section class="stats-grid" aria-label="Task summary">
-      <article class="stat-card">
-        <div class="stat-icon violet" aria-hidden="true">▤</div>
-        <div><p class="stat-label">Total tasks</p><p class="stat-value">08</p><p class="stat-note">Across your workspace</p></div>
-      </article>
-      <article class="stat-card">
-        <div class="stat-icon amber" aria-hidden="true">◷</div>
-        <div><p class="stat-label">In progress</p><p class="stat-value">05</p><p class="stat-note">Keep the momentum going</p></div>
-      </article>
-      <article class="stat-card">
-        <div class="stat-icon green" aria-hidden="true">✓</div>
-        <div><p class="stat-label">Completed</p><p class="stat-value">03</p><p class="stat-note">Nice work so far!</p></div>
-      </article>
-    </section>
-
-    <div class="content-grid">
-      <section class="panel form-panel" id="add-task" aria-labelledby="form-title">
-        <div class="panel-heading">
-          <div>
-            <p class="eyebrow">PLAN SOMETHING NEW</p>
-            <h2 id="form-title">Create a task</h2>
-          </div>
-          <span class="heading-icon" aria-hidden="true">＋</span>
+    <!-- Improvement 1: dashboard summary cards -->
+    <section class="dashboard-section" aria-labelledby="summary-heading">
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow">AT A GLANCE</p>
+          <h2 id="summary-heading">Task summary</h2>
         </div>
-        <p class="panel-intro">Add the details below to keep your next step clear.</p>
+        <p class="sample-note"></p>
+      </div>
+
+      <div class="summary-grid">
+        <article class="summary-card summary-total">
+          <span class="summary-label">Total tasks</span>
+          <strong>5</strong>
+          <span class="summary-caption">Tasks in your list</span>
+        </article>
+        <article class="summary-card summary-pending">
+          <span class="summary-label">Pending</span>
+          <strong>4</strong>
+          <span class="summary-caption">Still need attention</span>
+        </article>
+        <article class="summary-card summary-completed">
+          <span class="summary-label">Completed</span>
+          <strong>1</strong>
+          <span class="summary-caption">Successfully finished</span>
+        </article>
+        <article class="summary-card summary-overdue">
+          <span class="summary-label">Overdue</span>
+          <strong>1</strong>
+          <span class="summary-caption">Past the due date</span>
+        </article>
+      </div>
+
+      <div class="progress-panel">
+        <div class="progress-copy">
+          <div>
+            <h3>Completion progress</h3>
+            <p>1 of 5 tasks completed</p>
+          </div>
+          <strong>20%</strong>
+        </div>
+        <progress value="1" max="5" aria-label="Task completion progress">20%</progress>
+        <p class="field-help">Progress is a static sample and will not update automatically.</p>
+      </div>
+    </section>
+
+    <!-- Improvement 2 and 3: category selection and due-date organisation -->
+    <section class="panel" id="add-task" aria-labelledby="add-task-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">GET STARTED</p>
+          <h2 id="add-task-heading">Add a new task</h2>
+        </div>
         <p class="required-note"><span aria-hidden="true">*</span> Required fields</p>
+      </div>
 
-        <form class="task-form" action="#" method="get">
-          <div class="field">
-            <label for="task-title">Task title <span aria-hidden="true">*</span></label>
-            <input id="task-title" name="title" type="text" placeholder="e.g. Prepare project presentation" maxlength="100" required>
-          </div>
-          <div class="field">
-            <label for="task-description">Description</label>
-            <textarea id="task-description" name="description" rows="4" placeholder="Add a few details about this task..."></textarea>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label for="due-date">Due date <span aria-hidden="true">*</span></label>
-              <input id="due-date" name="due-date" type="date" required>
-            </div>
-            <div class="field">
-              <label for="priority">Priority <span aria-hidden="true">*</span></label>
-              <select id="priority" name="priority" required>
-                <option value="">Choose priority</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="category">Category</label>
-            <select id="category" name="category">
-              <option>Personal</option>
-              <option>Work</option>
-              <option>Study</option>
-            </select>
-          </div>
-          <button class="primary-button submit-button" type="submit">Add task <span aria-hidden="true">→</span></button>
-          <button class="text-button" type="reset">Clear form</button>
-        </form>
-        <p class="static-note">Demo interface: task creation is a visual form only; JavaScript and data storage are not included.</p>
-      </section>
-
-      <section class="panel tasks-panel" id="task-list" aria-labelledby="tasks-title">
-        <div class="tasks-heading">
-          <div>
-            <p class="eyebrow">STAY ON TRACK</p>
-            <h2 id="tasks-title">Your tasks <span class="count-pill">3</span></h2>
-          </div>
-          <a class="subtle-link" href="#add-task">＋ Add new</a>
+      <form class="task-form" action="#add-task" method="get">
+        <div class="form-field">
+          <label for="task-title">Task title <span aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="task-title"
+            name="task-title"
+            placeholder="e.g. Complete HTML assignment"
+            minlength="3"
+            maxlength="100"
+            aria-describedby="title-help"
+            required
+          >
+          <small class="field-help" id="title-help">Enter a clear title with at least 3 characters (maximum 100).</small>
         </div>
 
-        <form class="toolbar" action="#" method="get" aria-label="Task search and filters">
-          <div class="search-field">
-            <label class="visually-hidden" for="task-search">Search tasks</label>
-            <span aria-hidden="true">⌕</span>
-            <input id="task-search" name="search" type="search" placeholder="Search your tasks">
+        <div class="form-field">
+          <label for="task-description">Description</label>
+          <textarea
+            id="task-description"
+            name="task-description"
+            rows="3"
+            maxlength="300"
+            placeholder="Add more details about this task"
+            aria-describedby="description-help"
+          ></textarea>
+          <small class="field-help" id="description-help">Optional. Add up to 300 characters of helpful detail.</small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="due-date">Due date <span aria-hidden="true">*</span></label>
+            <input type="date" id="due-date" name="due-date" required>
           </div>
-          <div class="filter-field">
-            <label class="visually-hidden" for="task-filter">Filter tasks by status</label>
-            <select id="task-filter" name="status">
-              <option value="all">All tasks</option>
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
+          <div class="form-field">
+            <label for="priority">Priority <span aria-hidden="true">*</span></label>
+            <select id="priority" name="priority" required>
+              <option value="">Choose priority</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
             </select>
           </div>
-        </form>
-
-        <div class="task-list-label">
-          <span>RECENT TASKS</span>
-          <span>3 ITEMS</span>
+          <div class="form-field">
+            <label for="category">Category <span aria-hidden="true">*</span></label>
+            <select id="category" name="category" required>
+              <option value="">Choose category</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
+              <option value="study">Study</option>
+              <option value="shopping">Shopping</option>
+              <option value="health">Health</option>
+            </select>
+          </div>
         </div>
-        <ul class="task-list">
-          <li>
-            <article class="task-item">
-              <span class="task-check pending-check" aria-hidden="true"></span>
-              <div class="task-main">
-                <h3>Complete HTML assignment</h3>
-                <p>Finish the responsive page structure and review semantic elements.</p>
-                <div class="task-details">
-                  <span class="detail"><span aria-hidden="true">▦</span> 19 Nov 2026</span>
-                  <span class="priority-tag high">High priority</span>
-                </div>
-              </div>
-              <div class="task-side">
-                <span class="status-tag pending">Pending</span>
-                <div class="task-actions">
-                  <button type="button" class="icon-button" aria-label="Mark Complete for Complete HTML assignment" title="Mark complete">✓</button>
-                  <button type="button" class="icon-button delete-button" aria-label="Delete Complete HTML assignment" title="Delete">×</button>
-                </div>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="task-item">
-              <span class="task-check pending-check" aria-hidden="true"></span>
-              <div class="task-main">
-                <h3>Prepare project documentation</h3>
-                <p>Write the README and add desktop and mobile screenshots.</p>
-                <div class="task-details">
-                  <span class="detail"><span aria-hidden="true">▦</span> 21 Nov 2026</span>
-                  <span class="priority-tag medium">Medium priority</span>
-                </div>
-              </div>
-              <div class="task-side">
-                <span class="status-tag pending">Pending</span>
-                <div class="task-actions">
-                  <button type="button" class="icon-button" aria-label="Mark Complete for Prepare project documentation" title="Mark complete">✓</button>
-                  <button type="button" class="icon-button delete-button" aria-label="Delete Prepare project documentation" title="Delete">×</button>
-                </div>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="task-item completed-task">
-              <span class="task-check completed-check" aria-hidden="true">✓</span>
-              <div class="task-main">
-                <h3>Practice Python exercises</h3>
-                <p>Complete the daily programming practice session.</p>
-                <div class="task-details">
-                  <span class="detail"><span aria-hidden="true">▦</span> 18 Nov 2026</span>
-                  <span class="priority-tag low">Low priority</span>
-                </div>
-              </div>
-              <div class="task-side">
-                <span class="status-tag completed">Completed</span>
-                <div class="task-actions">
-                  <button type="button" class="icon-button" aria-label="Task already completed" disabled>✓</button>
-                  <button type="button" class="icon-button delete-button" aria-label="Delete Practice Python exercises" title="Delete">×</button>
-                </div>
-              </div>
-            </article>
-          </li>
-        </ul>
 
-        <section class="empty-state" aria-labelledby="empty-title" hidden>
-          <span class="empty-illustration" aria-hidden="true">✓</span>
-          <h3 id="empty-title">Nothing on your list</h3>
-          <p>There are no tasks to show right now. Create a task to get started.</p>
-          <a href="#add-task" class="subtle-link">Create your first task →</a>
+        <p class="form-guidance" id="form-guidance">
+          Complete every field marked with an asterisk (*).
+        </p>
+        <div class="form-actions">
+          <button class="button button-primary" type="submit">Add Task</button>
+          <button class="button button-quiet" type="reset">Clear form</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel" id="task-list" aria-labelledby="task-list-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR PLAN</p>
+          <h2 id="task-list-heading">My tasks</h2>
+        </div>
+        <span class="task-total">5 sample tasks</span>
+      </div>
+
+      <div class="task-tools">
+        <div class="filter-area">
+          <span class="control-label" id="filter-label">Filter by status</span>
+          <div class="filter-buttons" role="group" aria-labelledby="filter-label">
+            <button class="filter-button active" type="button" aria-pressed="true">All</button>
+            <button class="filter-button" type="button" aria-pressed="false">Pending</button>
+            <button class="filter-button" type="button" aria-pressed="false">Completed</button>
+          </div>
+          <small class="field-help"></small>
+        </div>
+        <div class="search-field">
+          <label for="task-search">Search tasks</label>
+          <input type="search" id="task-search" name="task-search" placeholder="Search by task title">
+        </div>
+      </div>
+
+      <div class="task-groups">
+        <section class="task-group" aria-labelledby="overdue-heading">
+          <div class="group-heading">
+            <h3 id="overdue-heading">Overdue</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card task-card-overdue">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Submit project proposal</h4>
+                    <span class="status status-overdue">Overdue — Pending</span>
+                  </div>
+                  <p class="task-description">Review the final proposal and send it to the project mentor.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-18">18 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-high">High</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Work</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Submit project proposal">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
         </section>
-        <p class="static-note">Search, filters and task action buttons are UI-only in this HTML/CSS version.</p>
-      </section>
-    </div>
 
-    <footer class="page-footer">
-      <span>© 2026 Taskflow. Built to help you focus.</span>
-      <span>Small steps. Big progress.</span>
-    </footer>
+        <section class="task-group" aria-labelledby="today-heading">
+          <div class="group-heading">
+            <h3 id="today-heading">Today</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Complete HTML assignment</h4>
+                    <span class="status status-pending">Pending</span>
+                  </div>
+                  <p class="task-description">Finish the semantic HTML structure and check all form labels.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-20">20 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-high">High</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Study</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Complete HTML assignment">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="task-group" aria-labelledby="week-heading">
+          <div class="group-heading">
+            <h3 id="week-heading">This week</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Review CSS Flexbox</h4>
+                    <span class="status status-pending">Pending</span>
+                  </div>
+                  <p class="task-description">Practise alignment, wrapping and responsive layouts.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-22">22 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-low">Low</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Study</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Review CSS Flexbox">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="task-group" aria-labelledby="upcoming-heading">
+          <div class="group-heading">
+            <h3 id="upcoming-heading">Upcoming</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Plan weekly schedule</h4>
+                    <span class="status status-pending">Pending</span>
+                  </div>
+                  <p class="task-description">Prepare a realistic plan for next week's learning and work.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-24">24 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-medium">Medium</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Personal</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Plan weekly schedule">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="task-group" aria-labelledby="completed-heading">
+          <div class="group-heading">
+            <h3 id="completed-heading">Completed</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card task-card-completed">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Practice Python</h4>
+                    <span class="status status-completed">Completed</span>
+                  </div>
+                  <p class="task-description">Revise functions, lists and dictionary operations.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-19">19 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-medium">Medium</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Study</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Practice Python">
+                  <button class="button button-small button-complete" type="button" disabled aria-label="Practice Python is already completed">Completed</button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="empty-state" id="empty-state" aria-labelledby="empty-heading" hidden>
+      <h2 id="empty-heading">No tasks to display</h2>
+      <p>There are no tasks here yet. Add a task to get started.</p>
+    </section>
+
+
   </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Task Tracker.</p>
+  </footer>
 </body>
 </html>
