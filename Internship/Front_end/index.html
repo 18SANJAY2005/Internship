@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A responsive and accessible task tracker interface built with HTML and CSS.">
+  <title>Task Tracker | My Workspace</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="kanban.js" defer></script>
+  <script type="module" src="taskApp.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#dashboard" aria-label="Task Tracker home">
+        <span class="brand-mark" aria-hidden="true">✓</span>
+        <span>Task Tracker</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#add-task">Add Task</a></li>
+          <li><a href="#task-list">My Tasks</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="welcome-panel" id="dashboard" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">YOUR WORKSPACE</p>
+        <h1 id="page-title">Stay on top of your tasks</h1>
+        <p class="intro-text">Plan your day, organise your work and keep moving towards your goals.</p>
+      </div>
+      <a class="welcome-link" href="#add-task">+ Add a task</a>
+    </section>
+
+    <!-- Dashboard summary cards -->
+    <section class="dashboard-section" aria-labelledby="summary-heading">
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow">AT A GLANCE</p>
+          <h2 id="summary-heading">Task summary</h2>
+        </div>
+        <p class="sample-note">Live totals from your task list</p>
+      </div>
+
+      <div class="summary-grid">
+        <article class="summary-card summary-total">
+          <span class="summary-label">Total tasks</span>
+          <strong>5</strong>
+          <span class="summary-caption">Tasks in your list</span>
+        </article>
+        <article class="summary-card summary-pending">
+          <span class="summary-label">Pending</span>
+          <strong>4</strong>
+          <span class="summary-caption">Still need attention</span>
+        </article>
+        <article class="summary-card summary-completed">
+          <span class="summary-label">Completed</span>
+          <strong>1</strong>
+          <span class="summary-caption">Successfully finished</span>
+        </article>
+        <article class="summary-card summary-overdue">
+          <span class="summary-label">Overdue</span>
+          <strong>1</strong>
+          <span class="summary-caption">Past the due date</span>
+        </article>
+      </div>
+
+      <div class="progress-panel">
+        <div class="progress-copy">
+          <div>
+            <h3>Completion progress</h3>
+            <p>1 of 5 tasks completed</p>
+          </div>
+          <strong>20%</strong>
+        </div>
+        <progress value="1" max="5" aria-label="Task completion progress">20%</progress>
+        <p class="field-help">Progress updates as you complete tasks.</p>
+      </div>
+    </section>
+
+    <!-- Kanban board -->
+    <section aria-labelledby="kanban-heading" class="panel kanban-panel" id="kanban-board">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WORKFLOW VIEW</p>
+          <h2 id="kanban-heading">Kanban board</h2>
+          <p class="kanban-intro">
+            See where each task stands as it moves through your workflow.
+          </p>
+        </div>
+        <span class="task-total">5 sample cards</span>
+      </div>
+
+      <p class="kanban-help" id="kanban-help">
+        Drag a card into another column to update its status. You can also use the card options menu and choose a destination. On touch devices or when using a keyboard, use the Move to control in the options menu.
+      </p>
+
+      <div aria-describedby="kanban-help" class="kanban-board">
+
+        <!-- To Do column -->
+        <section aria-labelledby="kanban-todo-heading" class="kanban-column column-todo" data-status="todo">
+          <header class="kanban-column-header">
+            <div class="kanban-column-title">
+              <span aria-hidden="true" class="column-indicator"></span>
+              <h3 id="kanban-todo-heading">To Do</h3>
+            </div>
+            <span aria-label="1 task" class="kanban-count" data-column-count="">1</span>
+          </header>
+
+          <ul class="kanban-card-list" data-drop-zone="">
+            <li>
+              <article class="kanban-card" data-status="todo" data-task-id="plan-weekly-schedule" draggable="true">
+                <div class="kanban-card-top">
+                  <span aria-hidden="true" class="drag-handle" title="Drag-ready card">⠿</span>
+                  <span class="kanban-current-status">To Do</span>
+                  <details class="card-menu">
+                    <summary aria-label="More options for Plan weekly schedule" title="Task options">&bull;&bull;&bull;</summary>
+                    <div aria-label="Task options" class="card-menu-panel">
+                      <p class="menu-heading">Task options</p>
+                      <button disabled="" type="button">
+                        Edit task
+                        <span>Not available yet</span>
+                      </button>
+                      <div class="menu-move-control">
+                        <label for="move-task-plan-weekly-schedule">Move to status</label>
+                        <select aria-label="Move Plan weekly schedule to status" class="menu-status-select" id="move-task-plan-weekly-schedule">
+                          <option selected="" value="todo">To Do</option>
+                          <option value="in-progress">In Progress</option>
+                          <option value="in-review">In Review</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                        <button class="menu-move-button" type="button">Move task</button>
+                      </div>
+                      <button disabled="" type="button">
+                        Delete task
+                        <span>Not available yet</span>
+                      </button>
+                    </div>
+                  </details>
+                </div>
+                <h4>Plan weekly schedule</h4>
+                <p class="kanban-card-description">
+                  Prepare a realistic plan for next week's learning and work.
+                </p>
+                <div class="kanban-card-meta">
+                  <div>
+                    <span class="meta-label">Priority</span>
+                    <span class="priority priority-medium">Medium</span>
+                  </div>
+                  <div>
+                    <span class="meta-label">Due date</span>
+                    <time datetime="2026-11-24">24 Nov 2026</time>
+                  </div>
+                </div>
+                <footer class="kanban-card-footer">
+                  <div class="assignee">
+                    <span aria-hidden="true" class="assignee-avatar">AM</span>
+                    <span>
+                      <small>Assigned to</small>
+                      <strong>Alex Morgan</strong>
+                    </span>
+                  </div>
+                  <span class="drag-hint">Drag to move</span>
+                </footer>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <!-- In Progress column -->
+        <section aria-labelledby="kanban-progress-heading" class="kanban-column column-progress" data-status="in-progress">
+          <header class="kanban-column-header">
+            <div class="kanban-column-title">
+              <span aria-hidden="true" class="column-indicator"></span>
+              <h3 id="kanban-progress-heading">In Progress</h3>
+            </div>
+            <span aria-label="2 tasks" class="kanban-count" data-column-count="">2</span>
+          </header>
+
+          <ul class="kanban-card-list" data-drop-zone="">
+            <li>
+              <article class="kanban-card" data-status="in-progress" data-task-id="complete-html-assignment" draggable="true">
+                <div class="kanban-card-top">
+                  <span aria-hidden="true" class="drag-handle" title="Drag-ready card">⠿</span>
+                  <span class="kanban-current-status">In Progress</span>
+                  <details class="card-menu">
+                    <summary aria-label="More options for Complete HTML assignment" title="Task options">&bull;&bull;&bull;</summary>
+                    <div aria-label="Task options" class="card-menu-panel">
+                      <p class="menu-heading">Task options</p>
+                      <button disabled="" type="button">
+                        Edit task
+                        <span>Not available yet</span>
+                      </button>
+                      <div class="menu-move-control">
+                        <label for="move-task-complete-html-assignment">Move to status</label>
+                        <select aria-label="Move Complete HTML assignment to status" class="menu-status-select" id="move-task-complete-html-assignment">
+                          <option value="todo">To Do</option>
+                          <option selected="" value="in-progress">In Progress</option>
+                          <option value="in-review">In Review</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                        <button class="menu-move-button" type="button">Move task</button>
+                      </div>
+                      <button disabled="" type="button">
+                        Delete task
+                        <span>Not available yet</span>
+                      </button>
+                    </div>
+                  </details>
+                </div>
+                <h4>Complete HTML assignment</h4>
+                <p class="kanban-card-description">
+                  Finish the semantic HTML structure and check all form labels.
+                </p>
+                <div class="kanban-card-meta">
+                  <div>
+                    <span class="meta-label">Priority</span>
+                    <span class="priority priority-high">High</span>
+                  </div>
+                  <div>
+                    <span class="meta-label">Due date</span>
+                    <time datetime="2026-11-20">20 Nov 2026</time>
+                  </div>
+                </div>
+                <footer class="kanban-card-footer">
+                  <div class="assignee">
+                    <span aria-hidden="true" class="assignee-avatar avatar-blue">JL</span>
+                    <span>
+                      <small>Assigned to</small>
+                      <strong>Jordan Lee</strong>
+                    </span>
+                  </div>
+                  <span class="drag-hint">Drag to move</span>
+                </footer>
+              </article>
+            </li>
+
+            <li>
+              <article class="kanban-card" data-status="in-progress" data-task-id="review-css-flexbox" draggable="true">
+                <div class="kanban-card-top">
+                  <span aria-hidden="true" class="drag-handle" title="Drag-ready card">⠿</span>
+                  <span class="kanban-current-status">In Progress</span>
+                  <details class="card-menu">
+                    <summary aria-label="More options for Review CSS Flexbox" title="Task options">&bull;&bull;&bull;</summary>
+                    <div aria-label="Task options" class="card-menu-panel">
+                      <p class="menu-heading">Task options</p>
+                      <button disabled="" type="button">
+                        Edit task
+                        <span>Not available yet</span>
+                      </button>
+                      <div class="menu-move-control">
+                        <label for="move-task-review-css-flexbox">Move to status</label>
+                        <select aria-label="Move Review CSS Flexbox to status" class="menu-status-select" id="move-task-review-css-flexbox">
+                          <option value="todo">To Do</option>
+                          <option selected="" value="in-progress">In Progress</option>
+                          <option value="in-review">In Review</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                        <button class="menu-move-button" type="button">Move task</button>
+                      </div>
+                      <button disabled="" type="button">
+                        Delete task
+                        <span>Not available yet</span>
+                      </button>
+                    </div>
+                  </details>
+                </div>
+                <h4>Review CSS Flexbox</h4>
+                <p class="kanban-card-description">
+                  Practise alignment, wrapping and responsive layouts.
+                </p>
+                <div class="kanban-card-meta">
+                  <div>
+                    <span class="meta-label">Priority</span>
+                    <span class="priority priority-low">Low</span>
+                  </div>
+                  <div>
+                    <span class="meta-label">Due date</span>
+                    <time datetime="2026-11-22">22 Nov 2026</time>
+                  </div>
+                </div>
+                <footer class="kanban-card-footer">
+                  <div class="assignee">
+                    <span aria-hidden="true" class="assignee-avatar avatar-violet">TR</span>
+                    <span>
+                      <small>Assigned to</small>
+                      <strong>Taylor Reed</strong>
+                    </span>
+                  </div>
+                  <span class="drag-hint">Drag to move</span>
+                </footer>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <!-- In Review column -->
+        <section aria-labelledby="kanban-review-heading" class="kanban-column column-review" data-status="in-review">
+          <header class="kanban-column-header">
+            <div class="kanban-column-title">
+              <span aria-hidden="true" class="column-indicator"></span>
+              <h3 id="kanban-review-heading">In Review</h3>
+            </div>
+            <span aria-label="1 task" class="kanban-count" data-column-count="">1</span>
+          </header>
+
+          <ul class="kanban-card-list" data-drop-zone="">
+            <li>
+              <article class="kanban-card" data-status="in-review" data-task-id="submit-project-proposal" draggable="true">
+                <div class="kanban-card-top">
+                  <span aria-hidden="true" class="drag-handle" title="Drag-ready card">⠿</span>
+                  <span class="kanban-current-status">In Review</span>
+                  <details class="card-menu">
+                    <summary aria-label="More options for Submit project proposal" title="Task options">&bull;&bull;&bull;</summary>
+                    <div aria-label="Task options" class="card-menu-panel">
+                      <p class="menu-heading">Task options</p>
+                      <button disabled="" type="button">
+                        Edit task
+                        <span>Not available yet</span>
+                      </button>
+                      <div class="menu-move-control">
+                        <label for="move-task-submit-project-proposal">Move to status</label>
+                        <select aria-label="Move Submit project proposal to status" class="menu-status-select" id="move-task-submit-project-proposal">
+                          <option value="todo">To Do</option>
+                          <option value="in-progress">In Progress</option>
+                          <option selected="" value="in-review">In Review</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                        <button class="menu-move-button" type="button">Move task</button>
+                      </div>
+                      <button disabled="" type="button">
+                        Delete task
+                        <span>Not available yet</span>
+                      </button>
+                    </div>
+                  </details>
+                </div>
+                <h4>Submit project proposal</h4>
+                <p class="kanban-card-description">
+                  Review the final proposal and send it to the project mentor.
+                </p>
+                <div class="kanban-card-meta">
+                  <div>
+                    <span class="meta-label">Priority</span>
+                    <span class="priority priority-high">High</span>
+                  </div>
+                  <div>
+                    <span class="meta-label">Due date</span>
+                    <time datetime="2026-11-18">18 Nov 2026</time>
+                  </div>
+                </div>
+                <footer class="kanban-card-footer">
+                  <div class="assignee">
+                    <span aria-hidden="true" class="assignee-avatar avatar-amber">PC</span>
+                    <span>
+                      <small>Assigned to</small>
+                      <strong>Priya Chen</strong>
+                    </span>
+                  </div>
+                  <span class="drag-hint">Drag to move</span>
+                </footer>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Completed column -->
+        <section aria-labelledby="kanban-completed-heading" class="kanban-column column-completed" data-status="completed">
+          <header class="kanban-column-header">
+            <div class="kanban-column-title">
+              <span aria-hidden="true" class="column-indicator"></span>
+              <h3 id="kanban-completed-heading">Completed</h3>
+            </div>
+            <span aria-label="1 task" class="kanban-count" data-column-count="">1</span>
+          </header>
+
+          <ul class="kanban-card-list" data-drop-zone="">
+            <li>
+              <article class="kanban-card kanban-card-completed" data-status="completed" data-task-id="practice-python" draggable="true">
+                <div class="kanban-card-top">
+                  <span aria-hidden="true" class="drag-handle" title="Drag-ready card">⠿</span>
+                  <span class="kanban-current-status">Completed</span>
+                  <details class="card-menu">
+                    <summary aria-label="More options for Practice Python" title="Task options">&bull;&bull;&bull;</summary>
+                    <div aria-label="Task options" class="card-menu-panel">
+                      <p class="menu-heading">Task options</p>
+                      <button disabled="" type="button">
+                        Edit task
+                        <span>Not available yet</span>
+                      </button>
+                      <div class="menu-move-control">
+                        <label for="move-task-practice-python">Move to status</label>
+                        <select aria-label="Move Practice Python to status" class="menu-status-select" id="move-task-practice-python">
+                          <option value="todo">To Do</option>
+                          <option value="in-progress">In Progress</option>
+                          <option value="in-review">In Review</option>
+                          <option selected="" value="completed">Completed</option>
+                        </select>
+                        <button class="menu-move-button" type="button">Move task</button>
+                      </div>
+                      <button disabled="" type="button">
+                        Delete task
+                        <span>Not available yet</span>
+                      </button>
+                    </div>
+                  </details>
+                </div>
+                <h4>Practice Python</h4>
+                <p class="kanban-card-description">
+                  Revise functions, lists and dictionary operations.
+                </p>
+                <div class="kanban-card-meta">
+                  <div>
+                    <span class="meta-label">Priority</span>
+                    <span class="priority priority-medium">Medium</span>
+                  </div>
+                  <div>
+                    <span class="meta-label">Due date</span>
+                    <time datetime="2026-11-19">19 Nov 2026</time>
+                  </div>
+                </div>
+                <footer class="kanban-card-footer">
+                  <div class="assignee">
+                    <span aria-hidden="true" class="assignee-avatar avatar-green">AM</span>
+                    <span>
+                      <small>Assigned to</small>
+                      <strong>Alex Morgan</strong>
+                    </span>
+                  </div>
+                  <span class="drag-hint">Drag to move</span>
+                </footer>
+              </article>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <p class="kanban-static-note">
+        <strong>How to move tasks:</strong>
+        Drag a card to another column, or use its options menu to choose a new status. Column counts and dashboard totals update automatically. Task changes are saved in this browser and stay in sync with the task list.
+      </p>
+      <p aria-atomic="true" aria-live="polite" class="visually-hidden" id="kanban-announcement"></p>
+    </section>
+
+    <!-- Add task form -->
+    <section class="panel" id="add-task" aria-labelledby="add-task-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">GET STARTED</p>
+          <h2 id="add-task-heading">Add a new task</h2>
+        </div>
+        <p class="required-note"><span aria-hidden="true">*</span> Required fields</p>
+      </div>
+
+      <form class="task-form" action="#add-task" method="get">
+        <div class="form-field">
+          <label for="task-title">Task title <span aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="task-title"
+            name="task-title"
+            placeholder="e.g. Complete HTML assignment"
+            minlength="3"
+            maxlength="100"
+            aria-describedby="title-help"
+            required
+          >
+          <small class="field-help" id="title-help">Enter a clear title with at least 3 characters (maximum 100).</small>
+        </div>
+
+        <div class="form-field">
+          <label for="task-description">Description</label>
+          <textarea
+            id="task-description"
+            name="task-description"
+            rows="3"
+            maxlength="300"
+            placeholder="Add more details about this task"
+            aria-describedby="description-help"
+          ></textarea>
+          <small class="field-help" id="description-help">Optional. Add up to 300 characters of helpful detail.</small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="due-date">Due date <span aria-hidden="true">*</span></label>
+            <input type="date" id="due-date" name="due-date" required>
+          </div>
+          <div class="form-field">
+            <label for="priority">Priority <span aria-hidden="true">*</span></label>
+            <select id="priority" name="priority" required>
+              <option value="">Choose priority</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="category">Category <span aria-hidden="true">*</span></label>
+            <select id="category" name="category" required>
+              <option value="">Choose category</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
+              <option value="study">Study</option>
+              <option value="shopping">Shopping</option>
+              <option value="health">Health</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="form-guidance" id="form-guidance" role="status" aria-live="polite">
+          Complete every field marked with an asterisk (*).
+        </p>
+
+        <div class="form-actions">
+          <button class="button button-primary" type="submit">Add Task</button>
+          <button class="button button-quiet" type="reset">Clear form</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Task list -->
+    <section class="panel" id="task-list" aria-labelledby="task-list-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR PLAN</p>
+          <h2 id="task-list-heading">My tasks</h2>
+        </div>
+
+        <div class="form-actions">
+          <span class="task-total">5 sample tasks</span>
+          <button class="button button-quiet" type="button" id="import-tasks">
+            Import Sample Tasks
+          </button>
+          <button class="button button-delete" type="button" id="reset-tasks">
+            Reset All Tasks
+          </button>
+        </div>
+      </div>
+
+      <p class="import-status" id="import-status" role="status" aria-live="polite" hidden></p>
+
+      <div class="task-tools">
+        <div class="filter-area">
+          <span class="control-label" id="filter-label">Filter by status</span>
+          <div class="filter-buttons" role="group" aria-labelledby="filter-label">
+            <button class="filter-button active" data-filter="all" type="button" aria-pressed="true">All</button>
+            <button class="filter-button" data-filter="pending" type="button" aria-pressed="false">Pending</button>
+            <button class="filter-button" data-filter="completed" type="button" aria-pressed="false">Completed</button>
+          </div>
+        </div>
+
+        <div class="search-field">
+          <label for="task-search">Search tasks</label>
+          <input type="search" id="task-search" name="task-search" placeholder="Search by task title">
+        </div>
+
+        <div class="search-field">
+          <label for="task-sort">Sort tasks</label>
+          <select id="task-sort" name="task-sort">
+            <option value="dueDate">Due date</option>
+            <option value="priority">Priority</option>
+            <option value="title">Title</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="visually-hidden" id="task-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+
+      <div class="task-groups">
+        <section class="task-group" data-task-group="overdue" aria-labelledby="overdue-heading">
+          <div class="group-heading">
+            <h3 id="overdue-heading">Overdue</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card task-card-overdue">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Submit project proposal</h4>
+                    <span class="status status-overdue">Overdue — Pending</span>
+                  </div>
+                  <p class="task-description">Review the final proposal and send it to the project mentor.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-18">18 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-high">High</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Work</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Submit project proposal">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="task-group" data-task-group="today" aria-labelledby="today-heading">
+          <div class="group-heading">
+            <h3 id="today-heading">Today</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Complete HTML assignment</h4>
+                    <span class="status status-pending">Pending</span>
+                  </div>
+                  <p class="task-description">Finish the semantic HTML structure and check all form labels.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-20">20 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-high">High</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Study</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Complete HTML assignment">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="task-group" data-task-group="this-week" aria-labelledby="week-heading">
+          <div class="group-heading">
+            <h3 id="week-heading">This week</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Review CSS Flexbox</h4>
+                    <span class="status status-pending">Pending</span>
+                  </div>
+                  <p class="task-description">Practise alignment, wrapping and responsive layouts.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-22">22 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-low">Low</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Study</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Review CSS Flexbox">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="task-group" data-task-group="upcoming" aria-labelledby="upcoming-heading">
+          <div class="group-heading">
+            <h3 id="upcoming-heading">Upcoming</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Plan weekly schedule</h4>
+                    <span class="status status-pending">Pending</span>
+                  </div>
+                  <p class="task-description">Prepare a realistic plan for next week's learning and work.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-24">24 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-medium">Medium</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Personal</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Plan weekly schedule">
+                  <button class="button button-small button-complete" type="button">Mark Complete <span class="ui-only"></span></button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="task-group" data-task-group="completed" aria-labelledby="completed-heading">
+          <div class="group-heading">
+            <h3 id="completed-heading">Completed</h3>
+            <span class="group-count">1 task</span>
+          </div>
+          <ul class="task-list">
+            <li>
+              <article class="task-card task-card-completed">
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <h4>Practice Python</h4>
+                    <span class="status status-completed">Completed</span>
+                  </div>
+                  <p class="task-description">Revise functions, lists and dictionary operations.</p>
+                  <div class="task-details">
+                    <span><strong>Due:</strong> <time datetime="2026-11-19">19 Nov 2026</time></span>
+                    <span><strong>Priority:</strong> <span class="priority priority-medium">Medium</span></span>
+                    <span><strong>Category:</strong> <span class="category-tag">Study</span></span>
+                  </div>
+                </div>
+                <div class="task-actions" aria-label="Actions for Practice Python">
+                  <button class="button button-small button-complete" type="button" disabled aria-label="Practice Python is already completed">Completed</button>
+                  <button class="button button-small button-delete" type="button">Delete <span class="ui-only"></span></button>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="empty-state" id="empty-state" aria-labelledby="empty-heading" hidden>
+      <h2 id="empty-heading">No tasks to display</h2>
+      <p>There are no tasks here yet. Add a task to get started.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Task Tracker.</p>
+  </footer>
+</body>
+</html>
